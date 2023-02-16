@@ -3,6 +3,7 @@ using namespace std;
 
 void merge(int arr[], int low, int mid, int high) {
 	int start = low, end = mid+1;
+	vector<int> temp;
 	while(start <= mid && end <= high) {
 		if(arr[start] <= arr[end]) {
 			temp.push_back(arr[start]);
