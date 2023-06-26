@@ -38,3 +38,39 @@ public:
         return postorder;
     }
 };
+
+
+// Iterative traversal using 1 stack
+// TC - O(2N)   SC - O(N)
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> postorder;
+        if(!root) return postorder;
+        stack<TreeNode*> st; // 1 2 3
+        TreeNode* curr = root;
+        while(curr != NULL || !st.empty()) {
+            if(curr != NULL) {
+                st.push(curr);
+                curr = curr->left;
+            }
+            else {
+                TreeNode* temp = st.top()->right; // 2
+                if(temp == NULL) {
+                    temp = st.top();
+                    st.pop();
+                    postorder.push_back(temp->val);
+                    while(!st.empty() && st.top()->right == temp) {
+                        temp = st.top();
+                        st.pop();
+                        postorder.push_back(temp->val);
+                    } 
+                }
+                else {
+                    curr = temp; // 2
+                }
+            }
+        }
+        return postorder;
+    }
+};
